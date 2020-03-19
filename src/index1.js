@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import Hello from './Hello';
-import { Line, ResponsiveLine } from '@nivo/line';
+import { Line } from '@nivo/line';
 import './style.css';
 import Dropdown from './Dropdown';
-import moment from 'react-moment';
+import Trial from './Trail.js'
 
-class App extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: 'React',
       data:[],
       country: [],
-      country1: "US",
-      country2: "China",
-      country3: "Italy",
-      country4: "Iran",
+      country1: "",
+      country2: "",
+      country3: "",
+      country4: "",
       data1: [],
       data2: [],
       data3: [],
@@ -53,25 +53,6 @@ fetch('https://pomber.github.io/covid19/timeseries.json')
     // )
 // })
 })
-//moment(date).format('MM-DD-YYYY')
-fetch("https://pomber.github.io/covid19/timeseries.json")
-.then(response => response.json())
-.then(data => {
-  data[this.state.country3].forEach(({ date, confirmed, recovered, deaths }) =>
-    // console.log(`${date} active cases: ${confirmed - recovered - deaths}`)
-    this.setState({
-      data1: [...this.state.data1, 
-        {
-          id: `Argentina`,
-          // color: "hsl(348, 70%, 50%)",
-          data: [
-            { x: new Date(`${date}`), y: confirmed },
-          ]
-        }
-      ]
-    })
-  )
-})
 }
 
 // ! how the state should look like 
@@ -102,22 +83,36 @@ fetch("https://pomber.github.io/covid19/timeseries.json")
 
   get lineChartConfig() {
     console.log(Object.keys(this.state.data))
-    console.log(this.state.data1)
+    console.log(this.state.country)
     return {
-      width: 1200,
-      height: 800,
-      data: this.state.data1,
-      xScale:{type: 'point' },
-      yScale:{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false },
+      width: 800,
+      height: 600,
+      data: [
+        {
+          id: `Line`,
+          data: [
+            { x: new Date(`09-10-2018`), y: 3 },
+            { x: new Date(`09-11-2018`), y: 5 },
+            { x: new Date(`09-12-2018`), y: 1 },
+            { x: new Date(`09-13-2018`), y: 6 },
+          ]
+        },
+        {
+          id: `Line2`,
+          data: [
+            { x: new Date(`09-10-2018`), y: 5 },
+            { x: new Date(`09-11-2018`), y: 3 },
+            { x: new Date(`09-12-2018`), y: 4 },
+            { x: new Date(`09-13-2018`), y: 3 },
+          ]
+        }
+      ],
       margin: {
         top: 50,
         right: 50,
         bottom: 50,
         left: 50,
       },
-      // colors:{scheme: 'set1'},
-      lineWidth:8,
-      pointSize:19,
       yScale: {
         type: 'linear',
         stacked: false
@@ -126,75 +121,9 @@ fetch("https://pomber.github.io/covid19/timeseries.json")
         type: 'time',
         precision: 'day',
       },
-      
-      axisBottom:{
+      axisBottom: {
         format: '%b %d',
-        orient: 'bottom',
-        tickSize: 5,
-        tickPadding: 5,
-      //   tickRotation: 0,
-        legend: 'Time period',
-        legendOffset: 46,
-        legendPosition: 'middle'
-      },
-      axisLeft:{
-        orient: 'left',
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: 'count',
-        legendOffset: -40,
-        legendPosition: 'middle'
-      },
-      legends:[
-        {
-          text: {
-            fill: 'red',
-            fontSize: '14px',
-            },
-            anchor: 'right',
-            // direction: 'column',
-            justify: true,
-            translateX: -900,
-            translateY: 0,
-            itemsSpacing: 0,
-            itemDirection: 'left-to-right',
-            itemWidth: 80,
-            itemHeight: 20,
-            itemOpacity: 0.75,
-            symbolSize: 12,
-            // symbolShape: 'circle',
-            symbolBorderColor: 'rgba(0, 0, 0, .5)',
-            effects: [
-                {
-                    on: 'hover',
-                    style: {
-                        itemBackground: 'rgba(0, 0, 0, .03)',
-                        itemOpacity: 1
-                    }
-                }
-            ]
-        }
-    ],
-    tooltip: {
-      container: {
-          background: 'white',
-          color: 'inherit',
-          fontSize: 'inherit',
-          borderRadius: '2px',
-          boxShadow: '0 1px 2px rgba(0, 0, 0, 0.25)',
-          padding: '5px 9px',
-      },
-      basic: {
-          whiteSpace: 'pre',
-          display: 'flex',
-          alignItems: 'center',
-      },
-      table: {},
-      tableCell: {
-          padding: '3px 5px',
-      },
-  },
+      }
     };
   }
 
@@ -208,7 +137,24 @@ fetch("https://pomber.github.io/covid19/timeseries.json")
         bottom: 60,
         left: 80
       },
-      data: this.state.data1,
+      data: [
+        {
+          id: 'fake corp. A',
+          data: [
+            {x: '2018-01-01',y: 7},
+            {x: '2018-01-02',y: 5},
+            {x: '2018-01-03',y: 11},
+          ]
+        },
+        {
+          id: 'fake corp. B',
+          data: [
+            {x: '2018-01-04',y: 14},
+            {x: '2018-01-05',y: 14},
+            {x: '2018-01-06',y: 15},
+          ]
+        }
+      ],
       animate: true,
       xScale:{
         type: 'time',
@@ -231,7 +177,7 @@ fetch("https://pomber.github.io/covid19/timeseries.json")
   }
 
   handleChange = () => {
-  fetch("https://pomber.github.io/covid19/timeseries.json")
+    fetch("https://pomber.github.io/covid19/timeseries.json")
   .then(response => response.json())
   .then(data => {
     data["Argentina"].forEach(({ date, confirmed, recovered, deaths }) =>
@@ -239,9 +185,21 @@ fetch("https://pomber.github.io/covid19/timeseries.json")
       this.setState({
         data1: [
           {
-            id: `Argentina`,
+            id: `Line`,
             data: [
-              { x: date, y: confirmed },
+              { x: new Date(`09-10-2018`), y: 3 },
+              { x: new Date(`09-11-2018`), y: 5 },
+              { x: new Date(`09-12-2018`), y: 1 },
+              { x: new Date(`09-13-2018`), y: 6 },
+            ]
+          },
+          {
+            id: `Line2`,
+            data: [
+              { x: new Date(`09-10-2018`), y: 5 },
+              { x: new Date(`09-11-2018`), y: 3 },
+              { x: new Date(`09-12-2018`), y: 4 },
+              { x: new Date(`09-13-2018`), y: 3 },
             ]
           }
         ]
@@ -255,19 +213,20 @@ fetch("https://pomber.github.io/covid19/timeseries.json")
     
     return (
       <div>
-        <Dropdown data={Object.keys(this.state.data)}/> 
-        <h3>Custom Data Index </h3>
-        {/* <ResponsiveLine key={null}
+        {/* <Dropdown data={Object.keys(this.state.data)}/>  */}
+        <h3>Custom Data Index1 </h3>
+        <Line key={1}
           {...this.lineChartConfig}
-        /> */}
+        />
 
-        {/* <h3>Data from the <a
+        <h3>Data from the <a
           href="http://nivo.rocks/storybook/?knob-curve=step&selectedKind=Line&selectedStory=time%20x%20scale&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybooks%2Fstorybook-addon-knobs"
           title="@nivo/line"
-        >example</a></h3> */}
+        >example</a></h3>
         {/* <Line key={2}
         {...this.lineChartConfigFromExample}
         /> */}
+        {/* <Trial/> */}
       </div>
     );
   }
