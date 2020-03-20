@@ -176,37 +176,37 @@ fetch('https://pomber.github.io/covid19/timeseries.json')
     };
   }
 
-  handleChange = () => {
-    fetch("https://pomber.github.io/covid19/timeseries.json")
-  .then(response => response.json())
-  .then(data => {
-    data["Argentina"].forEach(({ date, confirmed, recovered, deaths }) =>
-      // console.log(`${date} active cases: ${confirmed - recovered - deaths}`)
-      this.setState({
-        data1: [
-          {
-            id: `Line`,
-            data: [
-              { x: new Date(`09-10-2018`), y: 3 },
-              { x: new Date(`09-11-2018`), y: 5 },
-              { x: new Date(`09-12-2018`), y: 1 },
-              { x: new Date(`09-13-2018`), y: 6 },
-            ]
-          },
-          {
-            id: `Line2`,
-            data: [
-              { x: new Date(`09-10-2018`), y: 5 },
-              { x: new Date(`09-11-2018`), y: 3 },
-              { x: new Date(`09-12-2018`), y: 4 },
-              { x: new Date(`09-13-2018`), y: 3 },
-            ]
-          }
-        ]
-      })
-    )
-  })
-  }
+  // handleChange = () => {
+  //   fetch("https://pomber.github.io/covid19/timeseries.json")
+  // .then(response => response.json())
+  // .then(data => {
+  //   data["Argentina"].forEach(({ date, confirmed, recovered, deaths }) =>
+  //     // console.log(`${date} active cases: ${confirmed - recovered - deaths}`)
+  //     this.setState({
+  //       data1: [
+  //         {
+  //           id: `Line`,
+  //           data: [
+  //             { x: new Date(`09-10-2018`), y: 3 },
+  //             { x: new Date(`09-11-2018`), y: 5 },
+  //             { x: new Date(`09-12-2018`), y: 1 },
+  //             { x: new Date(`09-13-2018`), y: 6 },
+  //           ]
+  //         },
+  //         {
+  //           id: `Line2`,
+  //           data: [
+  //             { x: new Date(`09-10-2018`), y: 5 },
+  //             { x: new Date(`09-11-2018`), y: 3 },
+  //             { x: new Date(`09-12-2018`), y: 4 },
+  //             { x: new Date(`09-13-2018`), y: 3 },
+  //           ]
+  //         }
+  //       ]
+  //     })
+  //   )
+  // })
+  // }
 
   render() {
 
@@ -219,10 +219,10 @@ fetch('https://pomber.github.io/covid19/timeseries.json')
           {...this.lineChartConfig}
         />
 
-        <h3>Data from the <a
+        {/* <h3>Data from the <a
           href="http://nivo.rocks/storybook/?knob-curve=step&selectedKind=Line&selectedStory=time%20x%20scale&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybooks%2Fstorybook-addon-knobs"
           title="@nivo/line"
-        >example</a></h3>
+        >example</a></h3> */}
         {/* <Line key={2}
         {...this.lineChartConfigFromExample}
         /> */}

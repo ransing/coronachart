@@ -11,7 +11,7 @@ export default class Trail extends Component {
     this.state = {
       name: 'React',
       // data:[],
-      country: [],
+      countries: [],
       country1: "US",
       country2: "China",
       country3: "Italy",
@@ -20,30 +20,36 @@ export default class Trail extends Component {
       data2: [],
       data3: [],
       data4: [],
-      finalData:[]
+      finalData:[],
+      data: [],
+      dataObj: {}
     };
   }
 
 
 
   componentDidMount(){
+    
     fetch('https://pomber.github.io/covid19/timeseries.json')
     .then(r=>r.json())
     .then(data=>{
               this.setState( (state) => {
                 return {
                         // country: [...this.state.country, country],
-                        data: data
+                        data: data,
+                        countries: [...this.state.countries, Object.keys(data)]
                       }
               },
-              ()=>{
-                this.setState({
-                  country: [...this.state.country, Object.keys(data)]
-                })
-              }
+              // ()=>{
+              //   this.setState({
+              //     country: [...this.state.country, Object.keys(data)]
+              //   })
+              // }
               )
     })
-    this.addDataToArray()
+    
+    // this.addDataToArray()
+    // this.updateFinalData()
   }
 
 makeAnArray = () => {
@@ -52,41 +58,48 @@ makeAnArray = () => {
     this.state.country3,
     this.state.country4,
    ]
-  // return finalArr
+  return finalArr
 }
 
 
-addDataToArray (element) {
-  console.log(element)
+addDataToArray (element, index) {
+  console.log(element, index)
+  console.log(this.state.data[element])
   fetch("https://pomber.github.io/covid19/timeseries.json")
   .then(response => response.json())
   .then(data => {
-    data[`${element}`].forEach(({ date, confirmed, recovered, deaths }) => {
-      // const realDate = moment(date).format('MM-DD-YYYY')
-      const dataObj =  {
-        id: `${this.state.country1}`,
-        // color: "hsl(348, 70%, 50%)",
-        data: [
-          { x: (`${date}`), y: confirmed },
-        ]
+  data[element].forEach((date, confirmed) => {
+    this.setState({
+      finalData:  [ ...this.state.finalData, 
+      {
+        key: index,
+        id: element,
+        data: [{x: date, y: confirmed}]
       }
-      this.setState({
-        finalData:[dataObj , ...this.state.finalData]
-      })
-      this.state.finalData.slice(0,3)
-    });
+    ]
+    })
   })
-}
+})
 
+}
+  
 updateFinalData () {
-  this.makeAnArray().forEach((element)=>
-    this.addDataToArray(element)
+  const finalArr = [this.state.country1,
+    this.state.country2,
+    this.state.country3,
+    this.state.country4,
+   ]
+   console.log(finalArr)
+  finalArr.forEach((element, index)=>
+    this.addDataToArray(element, index)
   )
 }
   
   render() {
-      console.log(this.addDataToArray("US"))
-      console.log(this.state.finalData)
+    console.log(this.state.finalData);
+    this.updateFinalData();
+      // console.log(this.addDataToArray("US"))
+      // console.log(this.state.finalData)
         const data = [
             {
               "id": "japan",
@@ -363,7 +376,7 @@ updateFinalData () {
         
         const MyResponsiveLine = () => (
             <ResponsiveLine
-                data={this.state.finalData}
+                data={this.state.dataObj}
                 margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
                 xScale={{ type: 'point' }}
                 yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
@@ -438,7 +451,7 @@ updateFinalData () {
                     tickSize: 5,
                     tickPadding: 5,
                     tickRotation: 0,
-                    legend: 'transportation',
+                    legend: 'X Axis',
                     legendOffset: 36,
                     legendPosition: 'middle'
                 }}

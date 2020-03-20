@@ -1,3 +1,56 @@
 h1, p {
   font-family: Lato;
 }
+
+
+/* Dropdown begins */
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.multi-select {
+  border: 1px solid #242424;
+}
+
+.dropdown-heading {
+  background: #242424 !important;
+  cursor: pointer !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 0px !important;
+  font-family: "helvetica" !important;
+}
+
+.dropdown-heading .dropdown-heading-value span {
+  color: white !important;
+  font-family: "helvetica" !important;
+}
+
+.dropdown-heading:hover,
+.dropdown-heading:hover .dropdown-heading-value span {
+  background: white !important;
+  color: #4e4e4e !important;
+}
+
+/* .dropdown-heading .dropdown-heading-value:hover{
+  color: #4e4e4e !important;
+}
+
+.dropdown-heading .dropdown-heading-value span {
+  color: white !important;
+}
+.dropdown-heading .dropdown-heading-value span:hover{
+  color: #4e4e4e !important;
+} */
+
+.select-item .item-renderer span {
+  font-family: "helvetica" !important;
+}
+
+/* .dropdown-heading-dropdown-arrow span {
+  border: none !important;
+  background: url("M790.592 551.616l-45.184 45.12-233.408-233.344-233.408 233.344-45.184-45.12 278.592-278.592 278.592 278.592z") !important;
+} */
+

@@ -9,30 +9,32 @@ export default class Dropdown extends Component {
           name: 'React',
         //   data: this.props.data,
         //   country:this.props.data,
-          country1: "",
+          country1: "US",
           country2: "",
           country3: "",
           country4: "",
         };
       }
 
+    changeSelect = (e) => {
+            this.setState({
+                country1: e.target.value
+            });
+            this.props.changeState(e.target.value)
+    }
     
 
     render() {
-        console.log(this.props.data)
+        console.log(this.props.data, this.state)
         return (
-            <div>
-                    <select class="custom-select"
+        <div>
+        <select class="custom-select"
                         style={{"margin-bottom":"15px", "height":"30px","font-size":"17px",
                                 "background-color":"#ffff00"
                         }}
                         // options={options}
                         values={[]}
-                        onChange={e => {
-                        this.setState({
-                            country1: e.target.value
-                        });
-                    }}
+                        onChange={this.changeSelect}
             >
         {this.props.data.map((country) => (
                 <option
@@ -45,7 +47,7 @@ export default class Dropdown extends Component {
                 </option>
         ))}
         </select>
-            <Trail/>
+            {/* <Trail/> */}
 
         {/* <Index1 data={this.state}/> */}
                 

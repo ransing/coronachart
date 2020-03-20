@@ -5,14 +5,21 @@ import { Line, ResponsiveLine } from '@nivo/line';
 import './style.css';
 import Dropdown from './Dropdown';
 import moment from 'react-moment';
+import Trail from './Trail';
+import uuid from 'react-uuid';
+import { ThemeProvider } from '@nivo/core';
+import { black } from 'color-name';
+import Multiselect from "@khanacademy/react-multi-select";
 
-class App extends Component {
+
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: 'React',
       data:[],
       country: [],
+      countries: ["US","China","Italy","Iran"],
       country1: "US",
       country2: "China",
       country3: "Italy",
@@ -21,30 +28,33 @@ class App extends Component {
       data2: [],
       data3: [],
       data4: [],
+      selected: [],
+      isLoading: true
     };
   }
 
 componentDidMount(){
+setTimeout(() => {
+    this.setState({
+      isLoading: false
+    });
+  }, 5000);
 fetch('https://pomber.github.io/covid19/timeseries.json')
 //   method: 'GET'
 // })
 .then(r=>r.json())
 .then(data=>{
-  // console.log(Object.keys(data))
-      // Object.keys(data).forEach(function(country){
-      //     console.log(country)
-      //     console.log(data[country])
           this.setState( (state) => {
             return {
                     // country: [...this.state.country, country],
                     data: data
                   }
           },
-          ()=>{
-            this.setState({
-              country: [...this.state.country, Object.keys(data)]
-            })
-          }
+          // ()=>{
+          //   this.setState({
+          //     country: [...this.state.country, Object.keys(data)]
+          //   })
+          // }
           )
         
 
@@ -53,19 +63,189 @@ fetch('https://pomber.github.io/covid19/timeseries.json')
     // )
 // })
 })
+this.fetchAgain();
 //moment(date).format('MM-DD-YYYY')
+//! 1 
+
+
+// fetch("https://pomber.github.io/covid19/timeseries.json")
+// .then(response => response.json())
+// .then(data => {
+//   data[this.state.countries[3]].forEach(({ date, confirmed, recovered, deaths }) =>
+//     // console.log(`${date} active cases: ${confirmed - recovered - deaths}`)
+//     this.setState({
+//       data1: [...this.state.data1, 
+//         {
+//           key: uuid(),
+//           id: this.state.countries[3],
+//           // color: "hsl(348, 70%, 50%)",
+//           data: [
+//             {key: uuid(),  x: new Date(`${date}`), y: confirmed, value: "a" },
+//           ]
+//         }
+//       ]
+//     })
+//   )
+// })
+// //! 2 
+// fetch("https://pomber.github.io/covid19/timeseries.json")
+// .then(response => response.json())
+// .then(data => {
+//   data[this.state.countries[2]].forEach(({ date, confirmed, recovered, deaths }) =>
+//     // console.log(`${date} active cases: ${confirmed - recovered - deaths}`)
+//     this.setState({
+//       data1: [...this.state.data1, 
+//         {
+//           key: uuid(),
+//           id: this.state.countries[2],
+//           color: "hsla(117, 100%, 50%, 1)",
+//           data: [
+//             { key: uuid(),  x: new Date(`${date}`), y: confirmed, value: "a" },
+//           ]
+//         }
+//       ]
+//     })
+//   )
+// })
+// //! 3 
+// fetch("https://pomber.github.io/covid19/timeseries.json")
+// .then(response => response.json())
+// .then(data => {
+//   data[this.state.countries[1]].forEach(({ date, confirmed, recovered, deaths }) =>
+//     // console.log(`${date} active cases: ${confirmed - recovered - deaths}`)
+//     this.setState({
+//       data1: [...this.state.data1, 
+//         {
+//           key: uuid(),
+//           id: this.state.countries[1],
+//           color: "hsla(311, 100%, 50%, 1)",
+//           data: [
+//             { key: uuid(), x: new Date(`${date}`), y: confirmed, value: "a" },
+//           ]
+//         }
+//       ]
+//     })
+//   )
+// })
+// //! 4 
+// fetch("https://pomber.github.io/covid19/timeseries.json")
+// .then(response => response.json())
+// .then(data => {
+//   data[this.state.countries[0]].forEach(({ date, confirmed, recovered, deaths }) =>
+//     // console.log(`${date} active cases: ${confirmed - recovered - deaths}`)
+//     this.setState({
+//       data1: [...this.state.data1, 
+//         {
+//           key: uuid(),
+//           id: this.state.countries[0],
+//           color: "hsl(348, 70%, 50%)",
+//           data: [
+//             { key: uuid(), x: new Date(`${date}`), y: confirmed , value: "a"},
+//           ]
+//         }
+//       ]
+//     })
+//   )
+// })
+}
+
+// options= [
+//   Object.keys(this.state.data).map((country)=>{
+//      return  {label: country,
+//               value: country}
+//   })
+// ]
+
+makeArrayOfCountries = () => {
+  const countriesArray = Object.keys(this.state.data)
+  console.log(countriesArray)
+  //!  how do i iterate over this array to have output like {label: country, value: country}
+  var outcome = countriesArray.sort().map(function(value){
+    return {label: value, value: value};
+  })
+  return outcome
+    // countriesArray.forEach((country)=>{
+    //    return  country;
+    // })
+}
+
+fetchAgain = () => {
+  this.setState({
+    data1: []
+  })
 fetch("https://pomber.github.io/covid19/timeseries.json")
 .then(response => response.json())
 .then(data => {
-  data[this.state.country3].forEach(({ date, confirmed, recovered, deaths }) =>
+  data[this.state.countries[3]].forEach(({ date, confirmed, recovered, deaths }) =>
     // console.log(`${date} active cases: ${confirmed - recovered - deaths}`)
     this.setState({
       data1: [...this.state.data1, 
         {
-          id: `Argentina`,
+          key: uuid(),
+          id: this.state.countries[3],
           // color: "hsl(348, 70%, 50%)",
           data: [
-            { x: new Date(`${date}`), y: confirmed },
+            {key: uuid(),  x: new Date(`${date}`), y: confirmed, value: "a" },
+          ]
+        }
+      ]
+    })
+  )
+})
+//! 2 
+fetch("https://pomber.github.io/covid19/timeseries.json")
+.then(response => response.json())
+.then(data => {
+  data[this.state.countries[2]].forEach(({ date, confirmed, recovered, deaths }) =>
+    // console.log(`${date} active cases: ${confirmed - recovered - deaths}`)
+    this.setState({
+      data1: [...this.state.data1, 
+        {
+          key: uuid(),
+          id: this.state.countries[2],
+          color: "hsla(117, 100%, 50%, 1)",
+          data: [
+            { key: uuid(),  x: new Date(`${date}`), y: confirmed, value: "a" },
+          ]
+        }
+      ]
+    })
+  )
+})
+//! 3 
+fetch("https://pomber.github.io/covid19/timeseries.json")
+.then(response => response.json())
+.then(data => {
+  data[this.state.countries[1]].forEach(({ date, confirmed, recovered, deaths }) =>
+    // console.log(`${date} active cases: ${confirmed - recovered - deaths}`)
+    this.setState({
+      data1: [...this.state.data1, 
+        {
+          key: uuid(),
+          id: this.state.countries[1],
+          color: "hsla(311, 100%, 50%, 1)",
+          data: [
+            { key: uuid(), x: new Date(`${date}`), y: confirmed, value: "a" },
+          ]
+        }
+      ]
+    })
+  )
+})
+//! 4 
+fetch("https://pomber.github.io/covid19/timeseries.json")
+.then(response => response.json())
+.then(data => {
+  data[this.state.countries[0]].forEach(({ date, confirmed, recovered, deaths }) =>
+    // console.log(`${date} active cases: ${confirmed - recovered - deaths}`)
+    this.setState({
+      data1: [...this.state.data1, 
+        {
+          key: uuid(),
+          id: this.state.countries[0],
+          color: "hsl(348, 70%, 50%)",
+          data: [
+            { key: uuid(), x: new Date(`${date}`), y: confirmed , value: "a"},
           ]
         }
       ]
@@ -73,6 +253,17 @@ fetch("https://pomber.github.io/covid19/timeseries.json")
   )
 })
 }
+
+options = [
+  { label: "KPI Degradtion", value: "kpi_degradation" },
+  { label: "Sleeping Cell", value: "sleeping_cell" },
+  { label: "Anomaly", value: "anomaly" },
+  { label: "Label1", value: "label_1" },
+  { label: "Label2fgfgfgfghfghgh", value: "label_2" },
+  { label: "Label3", value: "label_3" },
+  { label: "Label4", value: "label_4" },
+  { label: "Label5", value: "label_5" }
+];
 
 // ! how the state should look like 
 // [
@@ -97,13 +288,36 @@ fetch("https://pomber.github.io/covid19/timeseries.json")
 //! id =${countries}
 // ? x = 
 
-  
+handleSelectedChanged = selected => {
+  this.setState({ selected: selected });
+  console.log(this.state.selected);
+};
+
+resetCountries = () => {
+  this.setState({selected: []})
+}
+
+updateCountries = () => {
+  this.setState({countries: this.state.selected});
+  this.fetchAgain();
+  // this.componentDidMount()
+  // this.forceUpdate()
+}
+
+changeState = (e) => {
+  // this.stateChange(e)
+  this.setState({
+    country1: e
+  })
+  console.log(this.state.country1)
+}
 
 
   get lineChartConfig() {
-    console.log(Object.keys(this.state.data))
-    console.log(this.state.data1)
+    // console.log(this.makeArrayOfCountries())
+    // console.log(Object.keys(this.state.data))
     return {
+      background: black,
       width: 1200,
       height: 800,
       data: this.state.data1,
@@ -115,7 +329,7 @@ fetch("https://pomber.github.io/covid19/timeseries.json")
         bottom: 50,
         left: 50,
       },
-      // colors:{scheme: 'set1'},
+      // colors:{scheme: 'paired'},
       lineWidth:8,
       pointSize:19,
       yScale: {
@@ -131,11 +345,11 @@ fetch("https://pomber.github.io/covid19/timeseries.json")
         format: '%b %d',
         orient: 'bottom',
         tickSize: 5,
-        tickPadding: 5,
+        tickPadding: 10,
       //   tickRotation: 0,
         legend: 'Time period',
         legendOffset: 46,
-        legendPosition: 'middle'
+        legendPosition: 'center'
       },
       axisLeft:{
         orient: 'left',
@@ -144,13 +358,14 @@ fetch("https://pomber.github.io/covid19/timeseries.json")
         tickRotation: 0,
         legend: 'count',
         legendOffset: -40,
-        legendPosition: 'middle'
+        legendPosition: 'center'
       },
+      pointColor:{ theme: 'background' },
       legends:[
         {
           text: {
             fill: 'red',
-            fontSize: '14px',
+            fontSize: 14,
             },
             anchor: 'right',
             // direction: 'column',
@@ -230,36 +445,58 @@ fetch("https://pomber.github.io/covid19/timeseries.json")
     };
   }
 
-  handleChange = () => {
-  fetch("https://pomber.github.io/covid19/timeseries.json")
-  .then(response => response.json())
-  .then(data => {
-    data["Argentina"].forEach(({ date, confirmed, recovered, deaths }) =>
-      // console.log(`${date} active cases: ${confirmed - recovered - deaths}`)
-      this.setState({
-        data1: [
-          {
-            id: `Argentina`,
-            data: [
-              { x: date, y: confirmed },
-            ]
-          }
-        ]
-      })
-    )
-  })
-  }
+  // handleChange = () => {
+  // fetch("https://pomber.github.io/covid19/timeseries.json")
+  // .then(response => response.json())
+  // .then(data => {
+  //   data["Argentina"].forEach(({ date, confirmed, recovered, deaths }) =>
+  //     // console.log(`${date} active cases: ${confirmed - recovered - deaths}`)
+  //     this.setState({
+  //       data1: [
+  //         {
+  //           id: `Argentina`,
+  //           data: [
+  //             { x: date, y: confirmed },
+  //           ]
+  //         }
+  //       ]
+  //     })
+  //   )
+  // })
+  // }
 
   render() {
+    console.log(this.state.data1.length);
 
-    
+    const { selected, isLoading } = this.state;
     return (
       <div>
+        <Multiselect
+          options={this.makeArrayOfCountries()}
+          onSelectedChanged={this.handleSelectedChanged}
+          selected={this.state.selected}
+          isLoading={isLoading}
+          disabled={isLoading}
+          disableSearch={false}
+          overrideStrings={{
+            selectSomeItems: "do me a favor by selecting something",
+            allItemsAreSelected: "You have gone nuts... all selected",
+            // selectAll: "do u wanna select all of them?",
+            search: "Fantasy search"
+          }}
+        />
+        <button onClick={this.resetCountries}> Reset </button>
+        <button onClick={this.updateCountries}>Update </button>
+        {selected.join(", ")}
+        {/* <Dropdown data={Object.keys(this.state.data)} changeState={(e)=> this.changeState(e)}/> 
         <Dropdown data={Object.keys(this.state.data)}/> 
+        <Dropdown data={Object.keys(this.state.data)}/> 
+        <Dropdown data={Object.keys(this.state.data)}/>  */}
+
         <h3>Custom Data Index </h3>
-        {/* <ResponsiveLine key={null}
+        <ResponsiveLine key={null}
           {...this.lineChartConfig}
-        /> */}
+        />
 
         {/* <h3>Data from the <a
           href="http://nivo.rocks/storybook/?knob-curve=step&selectedKind=Line&selectedStory=time%20x%20scale&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybooks%2Fstorybook-addon-knobs"
@@ -268,6 +505,7 @@ fetch("https://pomber.github.io/covid19/timeseries.json")
         {/* <Line key={2}
         {...this.lineChartConfigFromExample}
         /> */}
+        {/* <Trail/> */}
       </div>
     );
   }
