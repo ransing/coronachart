@@ -192,3 +192,126 @@ input[placeholder="Search Countries"]{
     left: 100px;
   }
 }
+
+/* animation part of syringe */
+.covid{
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-bottom: 30px
+}
+
+.surgeon{
+  font-size: 34px;
+  margin-left: 70px;
+  
+}
+
+.shot{
+  font-size: 35px;
+  position:absolute;
+  margin-left: 90px;
+  animation-name: shoot;
+   animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards
+}
+
+.world{
+  font-size: 35px;
+  margin-left: 70px;
+  animation-name: spin;
+  animation-duration: 3s;
+  animation-iteration-count:infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+    left: 600px; 
+  }
+  to {
+    transform: rotate(360deg);
+    left: 800px;
+  }
+}
+
+@keyframes shoot {
+    from {  
+    top: 20px;
+    left: 30px;
+  }
+  to {
+    top: 5px;
+    left: 70px;
+  }
+}
+
+/* buttons for nav */
+
+.casesButton {
+  background-color: rgb(247, 212, 17);
+  border: none;
+  color: rgb(0, 0, 0);
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.recoveredButton {
+  background-color: #4CAF50;
+  border: none;
+  color: rgb(0, 0, 0);
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.deathsButton {
+  background-color: rgb(175, 76, 76);
+  border: none;
+  color: rgb(0, 0, 0);
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.navButtons {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  align-items: center;
+}
+
+.nowShowing {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 60px;
+  right: 300px;
+  font-family:Verdana;
+  align-items: center;
+  font-size: 30px;
+  margin: 4px 2px;
+  color: rgb(173, 173, 161);
+  list-style: none;
+  border-color: coral;
+}

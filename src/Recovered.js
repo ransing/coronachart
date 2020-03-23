@@ -14,8 +14,7 @@ import saveImage from "./dom2Image";
 import {Link} from 'react-router-dom';
 import {BrowserRouter} from 'react-router-dom';
 import Multiselect from "@khanacademy/react-multi-select"; //!https://codesandbox.io/s/3k3vjplo5 OR https://codesandbox.io/s/xdxv6?module=/example.js
-import Deaths from './Deaths';
-import Recovered from './Recovered'
+import Deaths from './Deaths'
 
 export default class App extends Component {
   constructor(props) {
@@ -192,7 +191,7 @@ fetch("https://pomber.github.io/covid19/timeseries.json")
           id: this.state.countries[3],
           // color: "hsl(348, 70%, 50%)",
           data: [
-            {key: uuid(),  x: new Date(`${date}`), y: confirmed, value: "a" },
+            {key: uuid(),  x: new Date(`${date}`), y: recovered, value: "a" },
           ]
         }
       ]
@@ -212,7 +211,7 @@ fetch("https://pomber.github.io/covid19/timeseries.json")
           id: this.state.countries[2],
           color: "hsla(117, 100%, 50%, 1)",
           data: [
-            { key: uuid(),  x: new Date(`${date}`), y: confirmed, value: "a" },
+            { key: uuid(),  x: new Date(`${date}`), y: recovered, value: "a" },
           ]
         }
       ]
@@ -232,7 +231,7 @@ fetch("https://pomber.github.io/covid19/timeseries.json")
           id: this.state.countries[1],
           color: "hsla(311, 100%, 50%, 1)",
           data: [
-            { key: uuid(), x: new Date(`${date}`), y: confirmed, value: "a" },
+            { key: uuid(), x: new Date(`${date}`), y: recovered, value: "a" },
           ]
         }
       ]
@@ -252,7 +251,7 @@ fetch("https://pomber.github.io/covid19/timeseries.json")
           id: this.state.countries[0],
           color: "hsl(348, 70%, 50%)",
           data: [
-            { key: uuid(), x: new Date(`${date}`), y: confirmed , value: "a"},
+            { key: uuid(), x: new Date(`${date}`), y: recovered , value: "a"},
           ]
         }
       ]
@@ -368,7 +367,7 @@ changeState = (e) => {
         tickSize: 5,
         tickPadding: 0,
         tickRotation: 0,
-        legend: 'Confirmed Cases',
+        legend: 'Recovered Cases',
         legendOffset: -54,
         legendPosition: 'center'
       },
@@ -506,22 +505,19 @@ changeState = (e) => {
 
       <div class="navButtons">
       <BrowserRouter>
-        {/* <Link to="/"><a href='https://wwww.coronacases.netlify.com'> <button class="casesButton"> Confirmed Cases </button> </a> </Link>
-        <Link to="/deaths"> <a href='https://wwww.coronacases.netlify.com'> <button class="deathsButton"> Deaths</button> </a></Link>
-        <Link to="/recovered"><a href='https://wwww.coronacases.netlify.com'>  <button class="recoveredButton"> Recovered </button> </a></Link> */}
-        <a href='https://wwww.coronacases.netlify.com'> <button class="casesButton"> Confirmed Cases </button> </a> 
-        <a href='https://wwww.coronadeaths.netlify.com'> <button class="deathsButton"> Deaths</button> </a>
-        <a href='https://wwww.coronarecovered.netlify.com'>  <button class="recoveredButton"> Recovered </button> </a>
+        <Link to="/"> <button class="casesButton"> Confirmed Cases </button> </Link>
+        <Link to="/deaths"> <button class="deathsButton"> Deaths</button> </Link>
+        <Link to="/recovered"> <button class="recoveredButton"> Recovered </button> </Link>
       </BrowserRouter>
       </div>
 
-      <div class="nowShowing">
+      {/* <div class="nowShowing">
         <li> Now Showing:</li> 
         <li> Confirmed Cases  </li>
-      </div>
+      </div> */}
        
       <div style={{'width':'900', textAlign: "center", "marginLeft":'300', 'marginBlock': '0', 'margin': '0 auto'}}>
-      <h1 className="title">COVID-19 CASES ACROSS THE GLOBE</h1>
+      <h1 className="title">COVID-19 <span style={{'color': 'green'}}> RECOVERED </span> CASES ACROSS THE GLOBE</h1>
 
       <div class="covid"> 
       <div class="surgeon"> 😷</div>
@@ -577,8 +573,7 @@ changeState = (e) => {
           Download Screenshot
         </button>
         </div> */}
-        {/* <Deaths/>
-        <Recovered/> */}
+      
       </>
     );
   }

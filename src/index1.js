@@ -232,4 +232,4 @@ fetch('https://pomber.github.io/covid19/timeseries.json')
   }
 }
 
-render(<App />, document.getElementById('root'));
+// render(<App />, document.getElementById('root'));
