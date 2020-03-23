@@ -69,11 +69,19 @@ text[transform="translate(-54, 533.88671875) rotate(-90)"]{
 }	
 
 /* Time period */
-text[transform="translate(690, 60) rotate(0)"]{	
+/* text[transform="translate(690, 60) rotate(0)"]{	
   font-size: 30px !important;	
   font-weight: bold;	
   font-family: "Special Elite"	
-}	
+}	 */
+
+text[style="fill: rgb(51, 51, 51); font-size: 11px;"]{
+  font-size: 30px !important;	
+  font-weight: bold;	
+  font-family: "Special Elite"	
+}
+
+/* <text transform="translate(690, 60) rotate(0)" text-anchor="middle" style="fill: rgb(51, 51, 51); font-size: 11px;">Time period</text> */
 text[text-anchor="end"]{	
   font-size: 16px !important	
 }	
@@ -160,7 +168,7 @@ input[placeholder="Search Countries"]{
   margin-left: 50px;
   animation-name: spin;
   animation-duration: 3s;
-  animation-iteration-count: 15;
+  animation-iteration-count:infinite;
 }
 
 @keyframes spin {

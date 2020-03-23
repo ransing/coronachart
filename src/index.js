@@ -3,18 +3,21 @@ import { render } from 'react-dom';
 import Hello from './Hello';
 import { Line, ResponsiveLine } from '@nivo/line';
 import './style.css';
+import html2canvas from 'html2canvas';
 import Dropdown from './Dropdown';
 import moment from 'react-moment';
 import Trail from './Trail';
 import uuid from 'react-uuid';
 import { ThemeProvider } from '@nivo/core';
 import { black } from 'color-name';
+import saveImage from "./dom2Image";
 import Multiselect from "@khanacademy/react-multi-select"; //!https://codesandbox.io/s/3k3vjplo5 OR https://codesandbox.io/s/xdxv6?module=/example.js
 
 
 export default class App extends Component {
   constructor(props) {
     super(props);
+    this.printme = this.printme.bind(this);
     this.state = {
       name: 'React',
       data:[],
@@ -32,6 +35,7 @@ export default class App extends Component {
       isLoading: true
     };
   }
+
 
 componentDidMount(){
 setTimeout(() => {
@@ -254,6 +258,10 @@ fetch("https://pomber.github.io/covid19/timeseries.json")
 })
 }
 
+printme = event => {
+  saveImage("dom2Image");
+};
+
 options = [
   { label: "KPI Degradtion", value: "kpi_degradation" },
   { label: "Sleeping Cell", value: "sleeping_cell" },
@@ -366,7 +374,15 @@ changeState = (e) => {
       pointColor:{ theme: 'background' },
       enableArea:true,
       useMesh:true,
-    //   legends:[
+      legends:[
+              {
+                // text: {
+                // itemWidth: '80',
+                // itemHeight: '20',
+                // itemOpacity: '0.75',
+                // }
+              }
+          ],
     //     {
     //       text: {
     //         fill: 'red',
@@ -487,11 +503,7 @@ changeState = (e) => {
       
       <div style={{'width':'800', textAlign: "center", "marginLeft":'300', 'margin': '0 auto'}}>
       <h1 className="title">COVID-19 CASES ACROSS THE GLOBE</h1>
-      <div class="covid">
-            <div class="surgeon">😷</div>
-            <div class="shot">💉</div>
-            <div class="world">🌎</div>
-      </div>
+      
         <Multiselect
         style={{"display":"flex", "justify-content":"center", "align-items":"center"}}
           options={this.makeArrayOfCountries()}
@@ -517,7 +529,10 @@ changeState = (e) => {
 
         {/* <h3>Custom Data Index </h3> */}
         </div>
-        <div style={{'width':'100vw', 'margin': '75', 'backgroundColor':'white'}}>
+
+        
+
+        <div id="dom2Image"style={{'width':'100vw', 'margin': '75', 'backgroundColor':'white'}}>
         <ResponsiveLine key={null}
           {...this.lineChartConfig}
         />
@@ -531,6 +546,12 @@ changeState = (e) => {
         /> */}
         {/* <Trail/> */}
       </div>
+      {/* <div className="App" id="app" ref={this.myRef}>
+        <p id="foo">foo</p>
+        <button onClick={this.printme} id="link">
+          Download Screenshot
+        </button>
+        </div> */}
       </>
     );
   }
