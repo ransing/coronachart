@@ -9,7 +9,7 @@ import Trail from './Trail';
 import uuid from 'react-uuid';
 import { ThemeProvider } from '@nivo/core';
 import { black } from 'color-name';
-import Multiselect from "@khanacademy/react-multi-select";
+import Multiselect from "@khanacademy/react-multi-select"; //!https://codesandbox.io/s/3k3vjplo5 OR https://codesandbox.io/s/xdxv6?module=/example.js
 
 
 export default class App extends Component {
@@ -318,16 +318,17 @@ changeState = (e) => {
     // console.log(Object.keys(this.state.data))
     return {
       background: black,
-      width: 1200,
-      height: 800,
+      // width: 1200,
+      // height: 900,
       data: this.state.data1,
       xScale:{type: 'point' },
-      yScale:{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false },
+      yScale:{ type: 'linear', min: '57', max: 'auto', stacked: true, reverse: false },
+      curve:"monotoneY",
       margin: {
         top: 50,
-        right: 50,
-        bottom: 50,
-        left: 50,
+        right: 80,
+        bottom: 80,
+        left: 90,
       },
       // colors:{scheme: 'paired'},
       lineWidth:8,
@@ -345,52 +346,56 @@ changeState = (e) => {
         format: '%b %d',
         orient: 'bottom',
         tickSize: 5,
-        tickPadding: 10,
+        tickPadding: 0,
       //   tickRotation: 0,
         legend: 'Time period',
-        legendOffset: 46,
+        legendOffset: 60,
         legendPosition: 'center'
       },
       axisLeft:{
         orient: 'left',
         tickSize: 5,
-        tickPadding: 5,
+        tickPadding: 0,
         tickRotation: 0,
-        legend: 'count',
-        legendOffset: -40,
+        legend: 'Confirmed Cases',
+        legendOffset: -54,
         legendPosition: 'center'
       },
+      enableCrosshair:false,
+      enableGridY:false,
       pointColor:{ theme: 'background' },
-      legends:[
-        {
-          text: {
-            fill: 'red',
-            fontSize: 14,
-            },
-            anchor: 'right',
-            // direction: 'column',
-            justify: true,
-            translateX: -900,
-            translateY: 0,
-            itemsSpacing: 0,
-            itemDirection: 'left-to-right',
-            itemWidth: 80,
-            itemHeight: 20,
-            itemOpacity: 0.75,
-            symbolSize: 12,
-            // symbolShape: 'circle',
-            symbolBorderColor: 'rgba(0, 0, 0, .5)',
-            effects: [
-                {
-                    on: 'hover',
-                    style: {
-                        itemBackground: 'rgba(0, 0, 0, .03)',
-                        itemOpacity: 1
-                    }
-                }
-            ]
-        }
-    ],
+      enableArea:true,
+      useMesh:true,
+    //   legends:[
+    //     {
+    //       text: {
+    //         fill: 'red',
+    //         fontSize: 14,
+    //         },
+    //         anchor: 'right',
+    //         // direction: 'column',
+    //         justify: true,
+    //         translateX: -900,
+    //         translateY: 0,
+    //         itemsSpacing: 0,
+    //         itemDirection: 'left-to-right',
+    //         itemWidth: 80,
+    //         itemHeight: 20,
+    //         itemOpacity: 0.75,
+    //         symbolSize: 12,
+    //         // symbolShape: 'circle',
+    //         symbolBorderColor: 'rgba(0, 0, 0, .5)',
+    //         effects: [
+    //             {
+    //                 on: 'hover',
+    //                 style: {
+    //                     itemBackground: 'rgba(0, 0, 0, .03)',
+    //                     itemOpacity: 1
+    //                 }
+    //             }
+    //         ]
+    //     }
+    // ],
     tooltip: {
       container: {
           background: 'white',
@@ -466,12 +471,29 @@ changeState = (e) => {
   // }
 
   render() {
-    console.log(this.state.data1.length);
+    const content = (
+      <div>
+        <p style={{'font-size':'20px'}}>Select 4 Countries to Compare</p>
+      </div>
+  )
+
+  const countriesCount = this.state.selected.length
+    // console.log(this.state.countries.length);
 
     const { selected, isLoading } = this.state;
     return (
-      <div>
+
+      <>
+      
+      <div style={{'width':'800', textAlign: "center", "marginLeft":'300', 'margin': '0 auto'}}>
+      <h1 className="title">COVID-19 CASES ACROSS THE GLOBE</h1>
+      <div class="covid">
+            <div class="surgeon">😷</div>
+            <div class="shot">💉</div>
+            <div class="world">🌎</div>
+      </div>
         <Multiselect
+        style={{"display":"flex", "justify-content":"center", "align-items":"center"}}
           options={this.makeArrayOfCountries()}
           onSelectedChanged={this.handleSelectedChanged}
           selected={this.state.selected}
@@ -479,21 +501,23 @@ changeState = (e) => {
           disabled={isLoading}
           disableSearch={false}
           overrideStrings={{
-            selectSomeItems: "do me a favor by selecting something",
-            allItemsAreSelected: "You have gone nuts... all selected",
+            selectSomeItems: "Select Exactly 4 countries ",
+            allItemsAreSelected: "Please select exactly 4 countries",
             // selectAll: "do u wanna select all of them?",
-            search: "Fantasy search"
+            search: "Add 4 countries"
           }}
         />
-        <button onClick={this.resetCountries}> Reset </button>
-        <button onClick={this.updateCountries}>Update </button>
-        {selected.join(", ")}
+        <button class="resetButton" onClick={this.resetCountries}> Reset </button>
+        {countriesCount === 4 ? <button  class="updateButton" onClick={this.updateCountries}>Update</button> : null}
+        <h3 style={{'color':'white'}}>{selected.join(", ")}</h3>
         {/* <Dropdown data={Object.keys(this.state.data)} changeState={(e)=> this.changeState(e)}/> 
         <Dropdown data={Object.keys(this.state.data)}/> 
         <Dropdown data={Object.keys(this.state.data)}/> 
         <Dropdown data={Object.keys(this.state.data)}/>  */}
 
-        <h3>Custom Data Index </h3>
+        {/* <h3>Custom Data Index </h3> */}
+        </div>
+        <div style={{'width':'100vw', 'margin': '75', 'backgroundColor':'white'}}>
         <ResponsiveLine key={null}
           {...this.lineChartConfig}
         />
@@ -507,6 +531,7 @@ changeState = (e) => {
         /> */}
         {/* <Trail/> */}
       </div>
+      </>
     );
   }
 }
