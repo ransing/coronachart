@@ -509,17 +509,17 @@ changeState = (e) => {
         {/* <Link to="/"><a href='https://wwww.coronacases.netlify.com'> <button class="casesButton"> Confirmed Cases </button> </a> </Link>
         <Link to="/deaths"> <a href='https://wwww.coronacases.netlify.com'> <button class="deathsButton"> Deaths</button> </a></Link>
         <Link to="/recovered"><a href='https://wwww.coronacases.netlify.com'>  <button class="recoveredButton"> Recovered </button> </a></Link> */}
-        <a href='https://wwww.coronacases.netlify.com'> <button class="casesButton"> Confirmed Cases </button> </a> 
-        <a href='https://wwww.coronadeaths.netlify.com'> <button class="deathsButton"> Deaths</button> </a>
-        <a href='https://wwww.coronarecovered.netlify.com'>  <button class="recoveredButton"> Recovered </button> </a>
+        <a  target="_blank" href='https://wwww.coronacases.netlify.com'> <button class="casesButton"> Confirmed Cases </button> </a> 
+        {/* <a target="_blank" href='https://wwww.coronadeaths.netlify.com'> <button class="deathsButton"> Deaths</button> </a> */}
+        <a target="_blank" href='https://wwww.coronarecovered.netlify.com'>  <button class="recoveredButton"> Recovered </button> </a>
       </BrowserRouter>
       </div>
 
-      <div class="nowShowing">
+      {/* <div class="nowShowing">
         <li> Now Showing:</li> 
         <li> Confirmed Cases  </li>
-      </div>
-       
+      </div> */}
+{/*        
       <div style={{'width':'900', textAlign: "center", "marginLeft":'300', 'marginBlock': '0', 'margin': '0 auto'}}>
       <h1 className="title">COVID-19 CASES ACROSS THE GLOBE</h1>
 
@@ -527,9 +527,9 @@ changeState = (e) => {
       <div class="surgeon"> 😷</div>
       <div class="shot"> 💉</div>
       <div class="world"> 🌎</div>
-      </div>
+      </div> */}
       
-        <Multiselect
+        {/* <Multiselect
         style={{"display":"flex", "justify-content":"center", "align-items":"center"}}
           options={this.makeArrayOfCountries()}
           onSelectedChanged={this.handleSelectedChanged}
@@ -543,24 +543,24 @@ changeState = (e) => {
             // selectAll: "do u wanna select all of them?",
             search: "Add 4 countries"
           }}
-        />
-        <button class="resetButton" onClick={this.resetCountries}> Reset </button>
+        /> */}
+        {/* <button class="resetButton" onClick={this.resetCountries}> Reset </button>
         {countriesCount === 4 ? <button  class="updateButton" onClick={this.updateCountries}>Update</button> : null}
-        <h4 style={{'color':'white'}}>{selected.join(", ")}</h4>
+        <h4 style={{'color':'white'}}>{selected.join(", ")}</h4> */}
         {/* <Dropdown data={Object.keys(this.state.data)} changeState={(e)=> this.changeState(e)}/> 
         <Dropdown data={Object.keys(this.state.data)}/> 
         <Dropdown data={Object.keys(this.state.data)}/> 
         <Dropdown data={Object.keys(this.state.data)}/>  */}
 
         {/* <h3>Custom Data Index </h3> */}
-        </div>
+        {/* </div> */}
 
         
 
-        <div id="dom2Image"style={{'width':'100vw','margin': '60','marginRight':'60', 'marginTop': '0', 'backgroundColor':'white'}}>
+        {/* <div id="dom2Image"style={{'width':'100vw','margin': '60','marginRight':'60', 'marginTop': '0', 'backgroundColor':'white'}}>
         <ResponsiveLine key={null}
           {...this.lineChartConfig}
-        />
+        /> */}
 
         {/* <h3>Data from the <a
           href="http://nivo.rocks/storybook/?knob-curve=step&selectedKind=Line&selectedStory=time%20x%20scale&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybooks%2Fstorybook-addon-knobs"
@@ -570,7 +570,7 @@ changeState = (e) => {
         {...this.lineChartConfigFromExample}
         /> */}
         {/* <Trail/> */}
-      </div>
+      {/* </div> */}
       {/* <div className="App" id="app" ref={this.myRef}>
         <p id="foo">foo</p>
         <button onClick={this.printme} id="link">
@@ -579,10 +579,11 @@ changeState = (e) => {
         </div> */}
         {/* <a target="_blank" href="https://wwww.viraj.info"><button style={{'align':'center'}}>Feedback? </button> </a> */}
         {/* <p style={{'color':'#56A0D0','font-size':'15px', 'margin-top':'6px', 'font':'verdana'}}> <a target="_blank” >Source Code</a> </p> */}
+        <Deaths/>
         <div style={{"textAlign":"center", "marginBottom":"40px"}}>
         <a  style={{'color':'#56A0D0','font-size':'18px'}} target="_blank" href="https://viraj.info"> Get in Touch? </a>
         </div>
-        {/* <Deaths/>
+        {/* 
         <Recovered/> */}
       </>
     );
