@@ -509,19 +509,19 @@ changeState = (e) => {
         {/* <Link to="/"><a href='https://wwww.coronacases.netlify.com'> <button class="casesButton"> Confirmed Cases </button> </a> </Link>
         <Link to="/deaths"> <a href='https://wwww.coronacases.netlify.com'> <button class="deathsButton"> Deaths</button> </a></Link>
         <Link to="/recovered"><a href='https://wwww.coronacases.netlify.com'>  <button class="recoveredButton"> Recovered </button> </a></Link> */}
-        <a href='https://wwww.coronacases.netlify.com'> <button class="casesButton"> Confirmed Cases </button> </a> 
-        <a href='https://wwww.coronadeaths.netlify.com'> <button class="deathsButton"> Deaths</button> </a>
-        <a href='https://wwww.coronarecovered.netlify.com'>  <button class="recoveredButton"> Recovered </button> </a>
+        {/* <a href='https://wwww.coronacases.netlify.com'> <button class="casesButton"> Confirmed Cases </button> </a>  */}
+        <a target="_blank" href='https://wwww.coronadeaths.netlify.com'> <button class="deathsButton"> Deaths</button> </a>
+        <a target="_blank" href='https://wwww.coronarecovered.netlify.com'>  <button class="recoveredButton"> Recovered </button> </a>
       </BrowserRouter>
       </div>
 
-      <div class="nowShowing">
+      {/* <div class="nowShowing">
         <li> Now Showing:</li> 
         <li> Confirmed Cases  </li>
-      </div>
+      </div> */}
        
       <div style={{'width':'900', textAlign: "center", "marginLeft":'300', 'marginBlock': '0', 'margin': '0 auto'}}>
-      <h1 className="title">COVID-19 CASES ACROSS THE GLOBE</h1>
+      <h1 className="title">COVID-19 <span style={{'color':'yellow'}}>CASES  </span> ACROSS THE GLOBE </h1>
 
       <div class="covid"> 
       <div class="surgeon"> 😷</div>
