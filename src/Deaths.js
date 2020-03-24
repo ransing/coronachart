@@ -505,9 +505,9 @@ changeState = (e) => {
 
       <div class="navButtons">
       <BrowserRouter>
-        <Link to="/"> <button class="casesButton"> Confirmed Cases </button> </Link>
-        <Link to="/deaths"> <button class="deathsButton"> Deaths</button> </Link>
-        <Link to="/recovered"> <button class="recoveredButton"> Recovered </button> </Link>
+      {/* <a  target="_blank" href='https://wwww.coronacases.netlify.com'> <button class="casesButton"> Confirmed Cases </button> </a>  */}
+        <a target="_blank" href='https://www.coronadeaths.netlify.com'> <button class="deathsButton"> Deaths</button> </a>
+        <a target="_blank" href='https://www.coronarecovered.netlify.com'>  <button class="recoveredButton"> Recovered </button> </a>
       </BrowserRouter>
       </div>
 
@@ -567,6 +567,9 @@ changeState = (e) => {
         /> */}
         {/* <Trail/> */}
       </div>
+      <div style={{"textAlign":"center", "marginBottom":"40px"}}>
+        <a  style={{'color':'#56A0D0','font-size':'18px'}} target="_blank" href="https://viraj.info"> Get in Touch? </a>
+        </div>
       {/* <div className="App" id="app" ref={this.myRef}>
         <p id="foo">foo</p>
         <button onClick={this.printme} id="link">
