@@ -505,8 +505,8 @@ changeState = (e) => {
 
       <div class="navButtons">
       <BrowserRouter>
-      <a  target="_blank" href='https://wwww.coronacases.netlify.com'> <button class="casesButton"> Confirmed Cases </button> </a> 
-    <a target="_blank" href='https://wwww.coronadeaths.netlify.com'> <button class="deathsButton"> Deaths</button> </a>
+      <a  target="_blank" href='https://www.coronacases.netlify.com'> <button class="casesButton"> Confirmed Cases </button> </a> 
+    <a target="_blank" href='https://www.coronadeaths.netlify.com'> <button class="deathsButton"> Deaths</button> </a>
         {/* <a target="_blank" href='https://wwww.coronarecovered.netlify.com'>  <button class="recoveredButton"> Recovered </button> </a> */}
       </BrowserRouter>
       </div>
