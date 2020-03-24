@@ -579,12 +579,12 @@ changeState = (e) => {
         </div> */}
         {/* <a target="_blank" href="https://wwww.viraj.info"><button style={{'align':'center'}}>Feedback? </button> </a> */}
         {/* <p style={{'color':'#56A0D0','font-size':'15px', 'margin-top':'6px', 'font':'verdana'}}> <a target="_blank” >Source Code</a> </p> */}
-        <Deaths/>
+        {/* <Deaths/> */}
+        <Recovered/>
         <div style={{"textAlign":"center", "marginBottom":"40px"}}>
         <a  style={{'color':'#56A0D0','font-size':'18px'}} target="_blank" href="https://viraj.info"> Get in Touch? </a>
         </div>
-        {/* 
-        <Recovered/> */}
+        
       </>
     );
   }
